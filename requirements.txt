@@ -1,0 +1,18 @@
+streamlit==1.24.0
+mlxtend
+# pandas
+# numpy
+scikit-learn==1.2.2
+scikit-learn-extra==0.3.0
+seaborn
+matplotlib
+# datetime
+# parser
+streamlit-option-menu
+# GridOptionsBuilder
+# AgGrid
+# GridUpdateMode
+# DataReturnMode
+streamlit-aggrid
+streamlit-awesome-table
+streamlit-authenticator
