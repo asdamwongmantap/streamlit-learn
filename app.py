@@ -19,14 +19,14 @@ with st.sidebar:
 
 if selected == 'Dashboard':
     st.markdown("---")
-    st.title('Welcome To RFM-Product Dashboard')
+    st.title('Welcome To Streamlit Learn Dashboard')
 
-    st.write(" RFM-Product Dashboard merupakan tampilan visual yang dapat digunakan untuk mempresentasikan informasi mengenai produk secara ringkas dan terstruktur. Dashboard ini dapat digunakan untuk memantau produk, menganalisis tren penjualan produk, dan dapat digunakan sebagai bahan untuk pengambilan keputusan .")
+    st.write(" Streamlit Learn Dashboard merupakan tampilan visual yang dapat digunakan untuk mempresentasikan informasi mengenai produk secara ringkas dan terstruktur. Dashboard ini dapat digunakan untuk memantau produk, menganalisis tren penjualan produk, dan dapat digunakan sebagai bahan untuk pengambilan keputusan .")
     
     st.write('Silahkan Upload File dan Pilih Menu Sidebar untuk mulai melakukan analisa')
     # st.write('')
     st.markdown("---")
-elif selected == 'Analisa Produk':
+elif selected == 'Data Visualization':
     uploaded_file = st.file_uploader("Choose a file")
     ###### Transactions and Product Category datasets have no null cells.
     df_new = pd.read_csv(uploaded_file)
