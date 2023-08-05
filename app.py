@@ -1,17 +1,53 @@
 import streamlit as st
-# import yaml
-# from yaml.loader import SafeLoader
-# import streamlit_authenticator as stauth
-# from apps import dashboard,analyze,cluster # import your app modules here
-# import pandas as pd
+import pandas as pd
+import numpy as np
+import seaborn as sns
+from matplotlib import pyplot as plt
+import matplotlib.style as style
+from datetime import timedelta
+import datetime as dt
+import time
+import os
 from streamlit_option_menu import option_menu
 
 
 st.set_page_config(page_title="Streamlit learn", page_icon=None, layout="centered", initial_sidebar_state="auto", menu_items=None)
 with st.sidebar:
-    selected = option_menu("Main Menu", ["Dashboard","Analisa Produk", 'Klaster Produk'], 
-        icons=['house','basket', 'pie-chart'], menu_icon="cast", default_index=0)
+    selected = option_menu("Main Menu", ["Dashboard","Data Visualization"], 
+        icons=['house','pie-chart'], menu_icon="cast", default_index=0)
     selected
 
 if selected == 'Dashboard':
-    st.write("Hello")
+    st.markdown("---")
+    st.title('Welcome To RFM-Product Dashboard')
+
+    st.write(" RFM-Product Dashboard merupakan tampilan visual yang dapat digunakan untuk mempresentasikan informasi mengenai produk secara ringkas dan terstruktur. Dashboard ini dapat digunakan untuk memantau produk, menganalisis tren penjualan produk, dan dapat digunakan sebagai bahan untuk pengambilan keputusan .")
+    
+    st.write('Silahkan Upload File dan Pilih Menu Sidebar untuk mulai melakukan analisa')
+    # st.write('')
+    st.markdown("---")
+elif selected == 'Analisa Produk':
+    uploaded_file = st.file_uploader("Choose a file")
+    ###### Transactions and Product Category datasets have no null cells.
+    df_new = pd.read_csv(uploaded_file)
+    df_new.drop_duplicates(inplace = True)
+    sdf = df_new[df_new['Qty'] >= 0]
+    """Books, Electronics and Home & Kitchen were the most purchased product categories."""
+    category1 = sdf.groupby(by=['prod_cat'], as_index = False)['Qty'].count()
+    # plt.figure(figsize=(8,4))
+    # sns.set_style('whitegrid')
+    # sns.barplot(x = "prod_cat", y = 'Qty', data = category1,  palette= "plasma")
+    # plt.xlabel('Product Category')
+    # plt.ylabel('Total Orders')
+    # plt.title('Total successful orders per product category')
+    # plt.show()
+
+    st.set_option('deprecation.showPyplotGlobalUse', False)
+    fig = plt.figure(figsize=(8,4))
+    savefig = plt.savefig('orderperproduct.png')
+    sns.set_style('whitegrid')
+    sns.barplot(x = "prod_cat", y = 'Qty', data = category1,  palette= "plasma")
+    plt.xlabel('Product Category')
+    plt.ylabel('Total Orders')
+    plt.title('Total successful orders per product category')
+    st.pyplot(savefig)
