@@ -1,13 +1,7 @@
 import streamlit as st
 import pandas as pd
-import numpy as np
 import seaborn as sns
 from matplotlib import pyplot as plt
-import matplotlib.style as style
-from datetime import timedelta
-import datetime as dt
-import time
-import os
 from streamlit_option_menu import option_menu
 
 
@@ -34,14 +28,6 @@ elif selected == 'Data Visualization':
     sdf = df_new[df_new['Qty'] >= 0]
     """Books, Electronics and Home & Kitchen were the most purchased product categories."""
     category1 = sdf.groupby(by=['prod_cat'], as_index = False)['Qty'].count()
-    # plt.figure(figsize=(8,4))
-    # sns.set_style('whitegrid')
-    # sns.barplot(x = "prod_cat", y = 'Qty', data = category1,  palette= "plasma")
-    # plt.xlabel('Product Category')
-    # plt.ylabel('Total Orders')
-    # plt.title('Total successful orders per product category')
-    # plt.show()
-
     st.set_option('deprecation.showPyplotGlobalUse', False)
     fig = plt.figure(figsize=(8,4))
     savefig = plt.savefig('orderperproduct.png')
